@@ -1,0 +1,43 @@
+INSIEMI GUIDA 3.1
+
+Guida (E -> TE') = First(T) = { (,num }
+Guida (E' -> +TE') = First(+) = { + }
+Guida (E' -> -TE') = First(-) = { - }
+Guida (E' -> eps) = Follow(E') = { $,) }
+Guida (T -> FT') = First(F) = { (,num }
+Guida (T' -> *FT') = First(*) = { * }
+Guida (T' -> /FT') = First(/) = { / }
+Guida (T' -> eps) = Follow(T') = { $,+,-,) }
+Guida (F -> (E)) = First(() = { ( }
+Guida (F -> num) = First(num) = { num }
+Guida (S -> $) = First(E) 
+
+
+INSIEMI GUIDA 3.2
+
+Guida (prog -> statlist EOF) = First(statlist) = { =,PRINT,READ,COND,WHILE,{ }
+Guida (statlist -> stat statlistp) = First(stat) = { =,PRINT,READ,COND,WHILE,{ }
+Guida (statlistp -> ; stat statlistp) = First(statlistp) = { ; }
+Guida (statlistp -> eps) = Follow(statlistp) = { $,} }
+Guida (stat -> = id expr) = { = }
+Guida (stat -> print (exprlist)) = { PRINT }
+Guida (stat -> read (id)) = { READ }
+Guida (stat -> cond whenlist else stat) = { COND }
+Guida (stat -> while(bexpr) stat) = { WHILE }
+Guida (stat -> {statlist}) = { { }
+Guida (whenlist -> whenitem whenlistp) = { WHEN }
+Guida (whenlistp -> whenitem whenlistp) = { WHEN }
+Guida (whenlistp -> eps) = { ELSE }
+Guida (whenitem -> when (bexpr) do stat) = { WHEN }
+Guida (bexpr -> relop expr expr) = { RELOP }
+Guida (expr -> + (exprlist)) = { + }
+Guida (expr -> - expr expr)) = { - }
+Guida (expr -> * (exprlist)) = { * }
+Guida (expr -> / expr expr)) = { / }
+Guida (expr -> num) = { num }
+Guida (expr -> id) = { id }
+Guida (exprlist -> expr exprlistp) = { +,-,*,/,num,id }
+Guida (exprlistp -> expr exprlistp) = { +,-,*,/,num,id }
+Guida (exprlistp -> eps) = { ) }
+
+
